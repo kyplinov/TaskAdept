@@ -1,0 +1,33 @@
+table, th , td {
+    border: 1px solid grey;
+    border-collapse: collapse;
+    padding: 5px;
+ }
+ thead tr{
+    background-color: #afafaf;
+ }
+ tbody tr:nth-child(odd) {
+    background-color: #f2f2f2;
+ }
+ tbody tr:nth-child(even) {
+    background-color: #ffffff;
+ }
+ .success
+ {
+    background-color: #00800052 !important;
+ }
+ .fail
+ {
+    background-color: #ff42423d !important;
+ }
+
+ .tableSub
+ {
+ background: aqua;
+ }
+
+ .selected{
+     background: #0093ff !important;
+
+ }
+

@@ -1,0 +1,97 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Angular JS Table</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="app.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="col-sm-10">
+        <h2>Постановка задачи: </h2>
+        <p>
+            <ul>
+                <li>
+                    Доработать таблицу ниже.
+                    Данные в таблице: 1ст - имя и фамилия ученика(не редактируемая), 2ст - предметы(не редактируемая) и
+                    оценки по ним, 3ст - сумма оценок по предметам(не редактируемая), 4ст - выводится "Да" если сумма >
+                    300 и "Нет" если сумма < 300. В качестве данных для заполнения взять массив "students" в файле
+                        app.js </li>
+        <li>
+                        Если сумма > 350 то вся строка выделяется зеленым цветом, сумма < 250 - красным </li> <li>
+                            В 2ст поле оценка - редактируемая, при изменении оценки по предмету общая сумма
+                            рассчитывается с учетом изменения
+                </li>
+                <li>
+                    Кнопка "Добавить" - добавляет нового студента в таблицу. Имя и фамилия добавить по своему
+                    усмотрению, все оценки по предметам по умолчанию 0(редактируемые).
+                </li>
+                <li>
+                    Если кликаем на строку с учеником, то она выделяется цветом(светло-голубым)
+                </li>
+                <li>
+                    Кнопка "Удалить" - удаляет выделенного студента из таблицы
+                </li>
+                <li>
+                    Кнопка "Вверх/Вниз" - перемещает выбранного студента в таблице
+                </li>
+            </ul>
+        </p>
+        <!-- <img src="example.png" alt=""> пример таблицы -->
+    </div>
+
+
+    <div ng-app="mainApp" ng-controller="studentController">
+
+        <div style="margin-bottom: 0.5rem;">
+            <div class="col-sm-5">
+                <label>FirstName</label>
+                <input id="actionFirstName" class="form-control" ng-model="student.firstName"/>
+                <label>LastName</label>
+                <input id="actionLastName" class="form-control" ng-model="student.lastName"/>
+            </div>
+            <div style="margin-top: 10px" class="col-sm-6">
+            <input class="btn btn-primary" ng-click="addStudent(student)" type="button" value="Добавить">
+            <input class="btn btn-danger" ng-click="removeStudent(selectedRow)" type="button" value="Удалить">
+            <input class="btn btn-success" ng-click="upStudent(selectedRow)"  type="button" value="Вверх">
+            <input class="btn btn-success" ng-click="downStudent(selectedRow)" type="button" value="Вниз">
+            </div>
+        </div>
+
+        <table style="width: auto;">
+            <thead>
+                <tr>
+                    <th>Ученик</th>
+                    <th>Предметы</th>
+                    <th>Сумма</th>
+                    <th>Результат</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="student in students" ng-click="handleEvent($index)" ng-class="{selected: $index === selectedRow, success: getTotal(student).total>350, fail: getTotal(student).total<250}" >
+
+
+
+                    <td>{{student.firstName }} {{ student.lastName}}</td>
+
+                    <td>
+                        <table class="tableSub" >
+                            <tr class="trSub" ng-repeat="subject in student.subjects">
+                                <td><input ng-model="subject.name" disabled></td>
+                                <td><input ng-model="subject.marks" ng-model="subject.marks" type="number"></td>
+                            </tr>
+                        </table>
+                    </td>
+
+                    <td>{{ getTotal(student).total }}</td>
+                    <td>{{ getTotal(student).res }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+<script src="script.js"></script>
+</html>
