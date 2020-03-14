@@ -1,3 +1,4 @@
+/* Создание контроллера списка студентов */
 mainApp.controller('listStudentCtrl', function($scope, $rootScope) {
 
     $rootScope.students =

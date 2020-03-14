@@ -1,11 +1,12 @@
+/* Создание контроллера взаимодействия со списком студентов */
 mainApp.controller('operationStudentCtrl', function ($scope) {
 
     /* функция добавления нового студента  */
     $scope.addStudent = function addStudent (student) {
-        if (angular.isDefined(student) &&
+        if (angular.isDefined(student) &&  //проверка на коректность введеных данных в input
             angular.isDefined(student.firstName) &&
             angular.isDefined(student.lastName)) {
-            $scope.students.push(
+            $scope.students.push(  //запись нового пользователя в объект students
                 {
                     firstName: student.firstName,
                     lastName: student.lastName,
@@ -31,7 +32,7 @@ mainApp.controller('operationStudentCtrl', function ($scope) {
     /* функция перемещения выбранного студента вверх */
     $scope.upStudent = function upStudent (index){
         let i = index;
-        if(index === 0) {
+        if(index === 0) {  // проверка на первый элепент в объекте students
             console.error('Out of range');
             return null;
         }
@@ -44,7 +45,7 @@ mainApp.controller('operationStudentCtrl', function ($scope) {
     $scope.downStudent = function downStudent (index){
         let i = index;
         let arrLenght = ($scope.students.length);
-        if(index === --arrLenght) {
+        if(index === --arrLenght) { // проверка на последний элепент в объекте students
             console.error('Out of range');
             return null;
         }
@@ -54,7 +55,7 @@ mainApp.controller('operationStudentCtrl', function ($scope) {
     };
 
     /* функция выбора студента в таблице */
-    $scope["selectedRow"] = null;
+    $scope["selectedRow"] = null; // обнуляем выбранную строку
     $scope.handleEvent = function handleEvent (index) {
         $scope.selectedRow = index;
     };
